@@ -1,9 +1,9 @@
 ﻿<metadata>
-  <!--
-  This sample removes the class: android.support.v4.content.AsyncTaskLoader.LoadTask:
-  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='AsyncTaskLoader.LoadTask']" />
-  
-  This sample removes the method: android.support.v4.content.CursorLoader.loadInBackground:
-  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='CursorLoader']/method[@name='loadInBackground']" />
-  -->
+  <remove-node path="/api/package[@name='com.garmin.android.connectiq.adb']" />
+  <remove-node path="/api/package[@name='com.garmin.android.connectiq']/class[@name='BuildConfig']" />
+  <remove-node path="/api/package[@name='com.garmin.android.apps.connectmobile.connectiq']/class[@name='IConnectIQService.Stub']" />
+  <remove-node path="/api/package[@name='com.garmin.android.apps.connectmobile.connectiq']/class[@name='IConnectIQService.Stub.Proxy']" />
+  <remove-node path="/api/package[@name='com.garmin.monkeybrains.serialization']" />
+
+  <attr path="/api/package[@name='com.garmin.android.connectiq']/class[@name='ConnectIQ']" name="managedName">AConnectIQ</attr>
 </metadata>
