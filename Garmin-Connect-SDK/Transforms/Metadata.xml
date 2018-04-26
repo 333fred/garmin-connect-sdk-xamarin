@@ -5,5 +5,5 @@
   <remove-node path="/api/package[@name='com.garmin.android.apps.connectmobile.connectiq']/class[@name='IConnectIQService.Stub.Proxy']" />
   <remove-node path="/api/package[@name='com.garmin.monkeybrains.serialization']" />
 
-  <attr path="/api/package[@name='com.garmin.android.connectiq']/class[@name='ConnectIQ']" name="managedName">AConnectIQ</attr>
+  <attr path="/api/package[@name='com.garmin.android.connectiq']/class[@name='ConnectIQ']" name="managedName">IQ</attr>
 </metadata>
