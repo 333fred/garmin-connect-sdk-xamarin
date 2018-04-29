@@ -69,17 +69,13 @@ namespace BindingTest
 
             var knownDevices = _iq.KnownDevices;
             _device = knownDevices.First(dev => dev.FriendlyName == "vivoactive HR");
-            _iq.RegisterForDeviceEvents(_device, new IQDeviceEvents(this));
-        }
-
-        async void ReceivedDeviceInfo(IQDevice device, IQDevice.IQDeviceStatus status)
-        {
+            IQDevice.IQDeviceStatus status = _iq.GetDeviceStatus(_device);
             if (status != IQDevice.IQDeviceStatus.Connected)
             {
                 return;
             }
 
-            var appInfo = await _iq.GetApplicationInfoAsync("fc4cdb94-9339-44e4-ad86-2d235312f0e7", device);
+            var appInfo = await _iq.GetApplicationInfoAsync("fc4cdb94-9339-44e4-ad86-2d235312f0e7", _device);
             if (!appInfo.Installed)
             {
                 Log.Error("BindingTest", "Application not installed");
