@@ -56,60 +56,41 @@ namespace BindingTest
         private IQDevice _device;
         private IQApp _app;
 
-        void InitGarmin()
+        async void InitGarmin()
         {
             var commStrategy = IQ.IQConnectType.Wireless;
             _iq = IQ.GetInstance(this, commStrategy);
-            _iq.Initialize(this, true, new IQListener(this));
-        }
+            var initStatus = await _iq.InitializeAsync(this, autoUI: true);
+            if (initStatus.HasError)
+            {
+                Log.Error("BindingTest", $"Received garmin SDK error {initStatus.ErrorStatus}");
+                return;
+            }
 
-        void SdkReady()
-        {
             var knownDevices = _iq.KnownDevices;
             _device = knownDevices.First(dev => dev.FriendlyName == "vivoactive HR");
             _iq.RegisterForDeviceEvents(_device, new IQDeviceEvents(this));
         }
 
-        void ReceivedDeviceInfo(IQDevice device, IQDevice.IQDeviceStatus status)
+        async void ReceivedDeviceInfo(IQDevice device, IQDevice.IQDeviceStatus status)
         {
             if (status != IQDevice.IQDeviceStatus.Connected)
             {
                 return;
             }
 
-            _iq.GetApplicationInfo("fc4cdb94-9339-44e4-ad86-2d235312f0e7", device, new IQApplicationListener(this));
-        }
+            var appInfo = await _iq.GetApplicationInfoAsync("fc4cdb94-9339-44e4-ad86-2d235312f0e7", device);
+            if (!appInfo.Installed)
+            {
+                Log.Error("BindingTest", "Application not installed");
+                return;
+            }
 
-        void ReceivedAppInfo(IQApp app)
-        {
-            _app = app;
+            _app = appInfo.App;
             var javaMap = new Java.Util.HashMap();
             javaMap.Put(1, 6);
-            _iq.SendMessage(_device, _app, javaMap, new IQMessageListener());
-        }
-
-        private class IQListener : Java.Lang.Object, IQ.IConnectIQListener
-        {
-            private MainActivity _mainPage;
-            public IQListener(MainActivity container)
-            {
-                _mainPage = container;
-            }
-
-            public void OnInitializeError(IQ.IQSdkErrorStatus p0)
-            {
-                throw new Exception($"Received garmin error {p0}");
-            }
-
-            public void OnSdkReady()
-            {
-                _mainPage.SdkReady();
-            }
-
-            public void OnSdkShutDown()
-            {
-                throw new NotImplementedException();
-            }
+            var messageStatus = await _iq.SendMessageAsync(_device, _app, javaMap);
+            Log.Info("BindingTest", $"Message status {messageStatus.MessageStatus}");
         }
 
         private class IQDeviceEvents : Java.Lang.Object, IQ.IQDeviceEventListener
@@ -122,33 +103,6 @@ namespace BindingTest
             public void OnDeviceStatusChanged(IQDevice p0, IQDevice.IQDeviceStatus p1)
             {
                 _mainPage.ReceivedDeviceInfo(p0, p1);
-            }
-        }
-
-        private class IQApplicationListener : Java.Lang.Object, IQ.IQApplicationInfoListener
-        {
-            private MainActivity _mainPage;
-            public IQApplicationListener(MainActivity mainPage)
-            {
-                _mainPage = mainPage;
-            }
-
-            public void OnApplicationInfoReceived(IQApp p0)
-            {
-                _mainPage.ReceivedAppInfo(p0);
-            }
-
-            public void OnApplicationNotInstalled(string p0)
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        private class IQMessageListener : Java.Lang.Object, IQ.IQSendMessageListener
-        {
-            public void OnMessageStatus(IQDevice p0, IQApp p1, IQ.IQMessageStatus p2)
-            {
-                Log.Info("BindingTest", $"Received status {p2}");
             }
         }
     }

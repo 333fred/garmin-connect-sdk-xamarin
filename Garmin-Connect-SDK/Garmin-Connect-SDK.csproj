@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Additions\IQ_GetApplicationInfo.cs" />
+    <Compile Include="Additions\IQ_Initialize.cs" />
+    <Compile Include="Additions\IQ_Looper.cs" />
+    <Compile Include="Additions\IQ_OpenApplication.cs" />
+    <Compile Include="Additions\IQ_SendMessage.cs" />
+    <Compile Include="Additions\ObjectPool`1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -62,11 +68,4 @@
     <EmbeddedJar Include="Jars\connectiq.jar" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
