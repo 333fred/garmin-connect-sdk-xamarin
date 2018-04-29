@@ -88,19 +88,6 @@ namespace BindingTest
             var messageStatus = await _iq.SendMessageAsync(_device, _app, javaMap);
             Log.Info("BindingTest", $"Message status {messageStatus.MessageStatus}");
         }
-
-        private class IQDeviceEvents : Java.Lang.Object, IQ.IQDeviceEventListener
-        {
-            private MainActivity _mainPage;
-            public IQDeviceEvents(MainActivity mainPage)
-            {
-                _mainPage = mainPage;
-            }
-            public void OnDeviceStatusChanged(IQDevice p0, IQDevice.IQDeviceStatus p1)
-            {
-                _mainPage.ReceivedDeviceInfo(p0, p1);
-            }
-        }
     }
 }
 
