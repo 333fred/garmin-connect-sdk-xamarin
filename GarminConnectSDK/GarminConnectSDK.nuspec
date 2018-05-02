@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>GarminConnectSDK.Android</id>
+    <version>2.4.1</version>
+    <title>Garmin Connect SDK</title>
+    <authors>Fred Silberberg; Garmin</authors>
+    <owners>333fred</owners>
+    <licenseUrl>https://github.com/333fred/garmin-connect-sdk-xamarin/blob/master/license.txt</licenseUrl>
+    <projectUrl>https://github.com/333fred/garmin-connect-sdk-xamarin</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Xamarin Android bindings for the Garmin Connect SDK, available here: https://developer.garmin.com/connect-iq/sdk/</description>
+    <releaseNotes>Initial Release</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>Garmin Xamarin Android</tags>
+  </metadata>
+</package>

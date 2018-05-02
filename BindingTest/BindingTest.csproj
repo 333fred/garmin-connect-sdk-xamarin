@@ -99,13 +99,13 @@
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Garmin-Connect-SDK\Garmin-Connect-SDK.csproj">
+    <ProjectReference Include="..\GarminConnectSDK\GarminConnectSDK.csproj">
       <Project>{7d25ae69-bdd4-4ef7-a20b-cad929f4d146}</Project>
-      <Name>Garmin-Connect-SDK</Name>
+      <Name>GarminConnectSDK</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
 		Other similar extension points exist, see Microsoft.Common.targets.
 		<Target Name="BeforeBuild">
 		</Target>
